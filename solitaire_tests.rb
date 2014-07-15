@@ -21,4 +21,6 @@ b_deck = cipher.move_b(cipher.move_a(cipher.start_deck))
 triple_cut_deck = cipher.triple_cut(b_deck)
 check("Triple Cut A", [52, 'A', 1], triple_cut_deck[51..-1])
 check("Triple Cut B", ['B', 2, 3], triple_cut_deck[0..2])
+count_cut = cipher.count_cut(triple_cut_deck)
+check("Count Cut", ['A', 'B', 1 ], count_cut[51..-1])
 
