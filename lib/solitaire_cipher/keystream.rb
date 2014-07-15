@@ -21,6 +21,19 @@ module Keystream
   	deck
   end
 
+  def triple_cut(deck)
+    b = deck.index("B")
+    a = deck.index("A")
+    #Took this from previous ruby quiz
+    a, b = b, a if a > b
+    deck.replace([deck[(b+1)..-1],
+                  deck[a..b],
+                  deck[0...a]
+                 ].flatten)
+    deck
+  end
+
+
   def move_down(deck, index, last=nil)
   	if index == deck.size - 1
   	  deck[1..1] = deck[index], deck[1]
