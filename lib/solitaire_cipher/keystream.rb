@@ -16,10 +16,10 @@ module Keystream
     deck = @deck.dup
     result =[]
     while result.length != length
-      deck = self.move_a(deck)
-      deck = self.move_b(deck)
-      deck = self.triple_cut(deck)
-      deck = self.count_cut(deck)
+      deck = self.move_a
+      deck = self.move_b
+      deck = self.triple_cut
+      deck = self.count_cut
       letter = self.get_letter(deck)
       result << letter unless letter.nil?
     end
@@ -40,13 +40,13 @@ module Keystream
 
   def move_a
     index = @deck.index('A')
-    move_down(@deck, index, 'A')
+    move_down( index, 'A')
   end
 
   def move_b
   	2.times do 
   	  index = @deck.index("B")
-  	  @deck = move_down(@deck, index, 'B')
+  	  @deck = move_down(index, 'B')
   	end
   	deck
   end
