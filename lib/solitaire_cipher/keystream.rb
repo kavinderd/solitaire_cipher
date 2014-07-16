@@ -1,15 +1,19 @@
 module Keystream
 
   def start_deck()
-  	(1..52).to_a + ['A', 'B']
+  	@deck = (1..52).to_a + ['A', 'B']
+  end
+
+  def deck
+    @deck
   end
 
   def key_deck(deck)
 
   end
 
-  def keystream(d, length)
-    deck = d.dup
+  def keystream(length)
+    deck = @deck.dup
     result =[]
     while result.length != length
       deck = self.move_a(deck)
@@ -34,29 +38,29 @@ module Keystream
     end
   end
 
-  def move_a(deck)
-    index = deck.index('A')
-    move_down(deck, index, 'A')
+  def move_a
+    index = @deck.index('A')
+    move_down(@deck, index, 'A')
   end
 
-  def move_b(deck)
+  def move_b
   	2.times do 
-  	  index = deck.index("B")
-  	  deck = move_down(deck, index, 'B')
+  	  index = @deck.index("B")
+  	  @deck = move_down(@deck, index, 'B')
   	end
   	deck
   end
 
-  def triple_cut(deck)
-    b = deck.index("B")
-    a = deck.index("A")
+  def triple_cut
+    b = @deck.index("B")
+    a = @deck.index("A")
     #Took this from previous ruby quiz
     a, b = b, a if a > b
-    deck.replace([deck[(b+1)..-1],
-                  deck[a..b],
-                  deck[0...a]
+    @deck.replace([@deck[(b+1)..-1],
+                  @deck[a..b],
+                  @deck[0...a]
                  ].flatten)
-    deck
+    @deck
   end
 
 =begin
@@ -67,22 +71,22 @@ module Keystream
   2 3 4 ... 52 A B 1  (the 1 tells us to move just the B)
 =end
 
-  def count_cut(deck)
-    last = deck[-1].to_i
-    deck[-1..-1] = [deck[0...last], deck[-1]].flatten
-    last.times {deck.shift}
-    deck
+  def count_cut
+    last = @deck[-1].to_i
+    @deck[-1..-1] = [@deck[0...last], @deck[-1]].flatten
+    last.times {@deck.shift}
+    @deck
   end
 
 
-  def move_down(deck, index, last=nil)
-  	if index == deck.size - 1
-  	  deck[1..1] = deck[index], deck[1]
-  	  deck.pop
+  def move_down(index, last=nil)
+  	if index == @deck.size - 1
+  	  @deck[1..1] = @deck[index], @deck[1]
+  	  @deck.pop
   	else
-  	  deck[index+1], deck[index] = deck[index], deck[index+1]
+  	  @deck[index+1], @deck[index] = @deck[index], @deck[index+1]
   	end
-  	deck
+  	@deck
   end
 
 end
