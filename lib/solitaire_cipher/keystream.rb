@@ -8,6 +8,32 @@ module Keystream
 
   end
 
+  def keystream(d, length)
+    deck = d.dup
+    result =[]
+    while result.length != length
+      deck = self.move_a(deck)
+      deck = self.move_b(deck)
+      deck = self.triple_cut(deck)
+      deck = self.count_cut(deck)
+      letter = self.get_letter(deck)
+      result << letter unless letter.nil?
+    end
+    result
+  end
+
+  def get_letter(deck)
+    first = deck.first
+    first = 53 if first.instance_of? String
+    letter_int = deck[first]
+    if letter_int.instance_of? String
+      nil
+    else
+      letter_int -= 26 if letter_int > 26
+      (letter_int + 64).chr
+    end
+  end
+
   def move_a(deck)
     index = deck.index('A')
     move_down(deck, index, 'A')
