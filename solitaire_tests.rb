@@ -32,3 +32,5 @@ count_cut = cipher.count_cut
 check("Count Cut", ['A', 'B', 1 ], count_cut[51..-1])
 keystream = cipher.keystream(blank_string_array.first.length)
 check("Keystream", ['W', 'J', 'X', 'H'], keystream)
+encryption = cipher.encrypt("Code in Ruby, live longer!")
+check("Encryption", "GLNCQ MJAFF FVOMB JIYCB", encryption )
