@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require_relative "../lib/solitaire_cipher"
+begin
+  if ARGV[0] =~ /^(?:[A-Z]{5} )*[A-Z]{5}$/
+  	puts SolitaireCipher.new.decrypt(ARGV[0])
+  elsif ARGV.length == 1
+  	puts SolitaireCipher.new.encrypt(ARGV[0])
+  else
+  	abort "Solitaire Cipher: Please Provide an encryption/decryption string"
+  end
+rescue Errno::ENOENT => err
+  abort "solitaire cipher: #{err.message}"
+end
